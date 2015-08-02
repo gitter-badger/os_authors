@@ -4,7 +4,7 @@
   "description": "A tool to manage authors of open-source projects",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -21,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/reker-/os_authors/issues"
   },
-  "homepage": "https://github.com/reker-/os_authors#readme"
+  "homepage": "https://github.com/reker-/os_authors#readme",
+  "devDependencies": {
+    "chai": "^3.2.0",
+    "mocha": "^2.2.5"
+  }
 }
