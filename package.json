@@ -1,0 +1,25 @@
+{
+  "name": "os_authors",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reker-/os_authors.git"
+  },
+  "keywords": [
+    "git",
+    "foss",
+    "author",
+    "management"
+  ],
+  "author": "Hendrik Reker <reker.opensource@gmail.com> (https://github.com/reker-)",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/reker-/os_authors/issues"
+  },
+  "homepage": "https://github.com/reker-/os_authors#readme"
+}
