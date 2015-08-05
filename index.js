@@ -1,5 +1,6 @@
 var jsonfile = require('jsonfile');
 var snappy = require('snappy');
+var fs = require('fs');
 
 module.exports = {
     init    : __init,
@@ -43,7 +44,13 @@ function __save(opts) {
 
 function __load(opts) {
     opts = opts || {};
-    var obj = jsonfile.readFileSync(opts['path'] || './.ath.json');
+    var pth = opts['path'] || './.ath.json';
+    if (!__exists(pth)) {
+        if (opts['noCreate']) return false;
+        var o = __init();
+        __save({ 'instance': o, 'path' : pth });
+    }
+    var obj = jsonfile.readFileSync(pth);
     for (id in obj['authors']) {
         ___decompress(obj['authors'][id]);
     }
@@ -69,4 +76,13 @@ function ___decompress(obj, opts) {
     obj['nick'] = snappy.uncompressSync(new Buffer(obj['nick'] || ''), { 'asBuffer': false });
     obj['mail'] = snappy.uncompressSync(new Buffer(obj['mail'] || ''), { 'asBuffer': false });
     obj['wbpg'] = snappy.uncompressSync(new Buffer(obj['wbpg'] || ''), { 'asBuffer': false });
+}
+
+function __exists(path) {
+    try {
+        fs.statSync(path);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
