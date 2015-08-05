@@ -28,6 +28,8 @@
   },
   "dependencies": {
     "jsonfile": "^2.2.1",
-    "snappy": "^4.0.0"
+    "shelljs": "^0.5.1",
+    "snappy": "^4.0.0",
+    "yargs": "^3.17.1"
   }
 }
