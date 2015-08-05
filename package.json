@@ -27,6 +27,7 @@
     "mocha": "^2.2.5"
   },
   "dependencies": {
-    "jsonfile": "^2.2.1"
+    "jsonfile": "^2.2.1",
+    "snappy": "^4.0.0"
   }
 }

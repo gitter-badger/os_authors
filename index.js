@@ -1,4 +1,5 @@
 var jsonfile = require('jsonfile');
+var snappy = require('snappy');
 
 module.exports = {
     init    : __init,
@@ -33,14 +34,39 @@ function __add(name, nick, mail, wbpg, opts) {
 
 function __save(opts) {
     opts = opts || {};
-    var obj = jsonfile.writeFileSync(opts['path'] || './.ath.json', opts['instance'] || g_Project);
+    var obj = opts['instance'] || g_Project;
+    for (id in obj['authors']) {
+        ___compress(obj['authors'][id]);
+    }
+    jsonfile.writeFileSync(opts['path'] || './.ath.json', obj);
 }
 
 function __load(opts) {
     opts = opts || {};
     var obj = jsonfile.readFileSync(opts['path'] || './.ath.json');
+    for (id in obj['authors']) {
+        ___decompress(obj['authors'][id]);
+    }
     if (opts['instance'])
         opts['instance'] = obj;
     else
         g_Project = obj;
+}
+
+function ___compress(obj, opts) {
+    opts = opts || {};
+    obj = obj || {};
+    obj['name'] = snappy.compressSync(obj['name'] || '');
+    obj['nick'] = snappy.compressSync(obj['nick'] || '');
+    obj['mail'] = snappy.compressSync(obj['mail'] || '');
+    obj['wbpg'] = snappy.compressSync(obj['wbpg'] || '');
+}
+
+function ___decompress(obj, opts) {
+    opts = opts || {};
+    obj = obj || {};
+    obj['name'] = snappy.uncompressSync(new Buffer(obj['name']['data']), { 'asBuffer': false });
+    obj['nick'] = snappy.uncompressSync(new Buffer(obj['nick']['data']), { 'asBuffer': false });
+    obj['mail'] = snappy.uncompressSync(new Buffer(obj['mail']['data']), { 'asBuffer': false });
+    obj['wbpg'] = snappy.uncompressSync(new Buffer(obj['wbpg']['data']), { 'asBuffer': false });
 }
