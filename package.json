@@ -31,5 +31,8 @@
     "shelljs": "^0.5.1",
     "snappy": "^4.0.0",
     "yargs": "^3.17.1"
+  },
+  "bin": {
+    "os_authors": "bin/shell.js"
   }
 }
