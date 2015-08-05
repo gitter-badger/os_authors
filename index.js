@@ -56,17 +56,17 @@ function __load(opts) {
 function ___compress(obj, opts) {
     opts = opts || {};
     obj = obj || {};
-    obj['name'] = snappy.compressSync(obj['name'] || '');
-    obj['nick'] = snappy.compressSync(obj['nick'] || '');
-    obj['mail'] = snappy.compressSync(obj['mail'] || '');
-    obj['wbpg'] = snappy.compressSync(obj['wbpg'] || '');
+    obj['name'] = snappy.compressSync(obj['name'] || '').toString('utf8');
+    obj['nick'] = snappy.compressSync(obj['nick'] || '').toString('utf8');
+    obj['mail'] = snappy.compressSync(obj['mail'] || '').toString('utf8');
+    obj['wbpg'] = snappy.compressSync(obj['wbpg'] || '').toString('utf8');
 }
 
 function ___decompress(obj, opts) {
     opts = opts || {};
     obj = obj || {};
-    obj['name'] = snappy.uncompressSync(new Buffer(obj['name']['data']), { 'asBuffer': false });
-    obj['nick'] = snappy.uncompressSync(new Buffer(obj['nick']['data']), { 'asBuffer': false });
-    obj['mail'] = snappy.uncompressSync(new Buffer(obj['mail']['data']), { 'asBuffer': false });
-    obj['wbpg'] = snappy.uncompressSync(new Buffer(obj['wbpg']['data']), { 'asBuffer': false });
+    obj['name'] = snappy.uncompressSync(new Buffer(obj['name'] || ''), { 'asBuffer': false });
+    obj['nick'] = snappy.uncompressSync(new Buffer(obj['nick'] || ''), { 'asBuffer': false });
+    obj['mail'] = snappy.uncompressSync(new Buffer(obj['mail'] || ''), { 'asBuffer': false });
+    obj['wbpg'] = snappy.uncompressSync(new Buffer(obj['wbpg'] || ''), { 'asBuffer': false });
 }
